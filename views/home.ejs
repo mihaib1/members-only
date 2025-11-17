@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
     <title>Members Only</title>
 </head>
 <body>
@@ -11,11 +12,11 @@
             <%- include("./partials/header.ejs") %>
         </div>
         <div class="row">
-            Hello World!
+            Hello <%= user.first_name %>
         </div>
         
-        <a href="/login"><button>Login</button></a>
-        <a href="/register"><button>Register</button></a>
+        
+        <a href="/logout"><button class="btn btn-danger">Log Out</button></a>
     </div>
 
 </body>

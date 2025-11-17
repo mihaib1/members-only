@@ -12,8 +12,6 @@ registerRouter.get("/", (req, res) => {
 registerRouter.post("/", (req, res) => {
     let registrationResult = registrationActions.createUser(req.body);
     registrationResult.then((result) => {
-        console.log("regresult = ")
-        console.log(result)
         res.redirect("/");
     });
 });

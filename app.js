@@ -5,9 +5,13 @@ const indexRouter = require("./routers/indexRouter");
 const loginRouter = require("./routers/loginRouter");
 const registerRouter = require("./routers/registerRouter");
 
+const flash = require("express-flash");
+
 const session = require("express-session");
 const passport = require("passport");
-const LocalStrategy = require('passport-local').Strategy;
+
+const initializePassport = require("./passport-config");
+initializePassport(passport);
 
 const path = require('node:path');
 const express = require('express');
@@ -20,6 +24,18 @@ app.use("/bootstrap", express.static(__dirname + '/node_modules/bootstrap/dist')
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
+app.use(session({
+    secret: process.env.SESSION_SECRET, 
+    resave: false, 
+    saveUninitialized: false
+}));
+
+app.use(flash());
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+//app.use("/", indexRouter);
 app.use("/", indexRouter);
 app.use("/login", loginRouter);
 app.use("/register", registerRouter);
@@ -30,3 +46,4 @@ app.listen(PORT, function(err){
     } 
     console.log(`Listening on port ${PORT}`);
 });
+

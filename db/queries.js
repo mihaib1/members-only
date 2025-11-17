@@ -26,6 +26,25 @@ class UserQueries {
         } 
         return false;
     }
+
+    async getUserDetailsByEmail(email){
+        const SQL = `SELECT * FROM member WHERE email = $1`;
+        if(email){
+            const requestData = [email];
+            let result = await pool.query(SQL, requestData);
+            return result.rows[0];
+        } return null;
+    }
+
+    async getUserById(id){
+        const SQL = `SELECT * FROM member WHERE id = $1`;
+        if(id){
+            const requestData = [id];
+            let result = await pool.query(SQL, requestData);
+            return result.rows[0];
+        }
+        return null;
+    }
 }
 
 module.exports = {
