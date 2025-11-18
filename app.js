@@ -6,6 +6,7 @@ const loginRouter = require("./routers/loginRouter");
 const registerRouter = require("./routers/registerRouter");
 
 const flash = require("express-flash");
+const methodOverride = require("method-override");
 
 const session = require("express-session");
 const passport = require("passport");
@@ -23,6 +24,7 @@ app.use("/bootstrap", express.static(__dirname + '/node_modules/bootstrap/dist')
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
+app.use(methodOverride("_method"));
 
 app.use(session({
     secret: process.env.SESSION_SECRET, 
@@ -39,6 +41,14 @@ app.use(passport.session());
 app.use("/", indexRouter);
 app.use("/login", loginRouter);
 app.use("/register", registerRouter);
+
+app.delete("/logout", (req, res, next) => {
+    req.logout(function(err){
+        if(err) return next(err);
+         
+    });
+    res.redirect("/");
+})
 
 app.listen(PORT, function(err){
     if(err){

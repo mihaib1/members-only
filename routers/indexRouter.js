@@ -5,11 +5,10 @@ const db = require("../db/queries");
 const passport = require("passport");
 
 indexRouter.get("/", checkAuthenticated, (req, res) => {
-    console.log("user = ", req.user);
     res.render("home", {user: req.user});
 });
 
-indexRouter.get("/login", (req, res) => {
+indexRouter.get("/login", checkNotAuthenticated, (req, res) => {
     res.render("login");
 })
 
@@ -22,7 +21,7 @@ function checkAuthenticated(req, res, next){
 
 function checkNotAuthenticated(req, res, next){
     if(req.isAuthenticated()){
-        res.redirect("/");
+        return res.redirect("/");
     }
     next();
 }
