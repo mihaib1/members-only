@@ -3,7 +3,9 @@ const bcrypt = require("bcryptjs");
 
 class MessageQueries {
     async getAllMessagesWithDetails() {
-        const SQL = `SELECT * FROM message ORDER BY created_on DESC;`;
+        const SQL = `SELECT msg.title, msg.text, msg.created_on, m.full_name FROM message AS msg
+                    INNER JOIN member AS m ON msg.created_by = m.id
+                    ORDER BY msg.created_on DESC;`;
         const {rows} = await pool.query(SQL);
         return rows;
     }
@@ -12,6 +14,18 @@ class MessageQueries {
         const SQL = `SELECT title, text FROM message ORDER BY created_on DESC;`;
         const { rows } = await pool.query(SQL);
         return rows;
+    }
+
+    async createMessage(data){
+        const SQL = `INSERT INTO message (title, text, created_by, created_on, modified_on)
+                    VALUES ($1, $2, $3, $4, $5) RETURNING id;`;
+        
+        if(data){
+            let insertData = [data.title, data.text, data.userId, new Date(), new Date()];
+            let insertRequest = await pool.query(SQL, insertData);
+            return insertRequest.rows[0].id;
+        }
+                    
     }
 }
 

@@ -4,12 +4,28 @@ const indexRouter = Router();
 const db = require("../db/queries");
 const passport = require("passport");
 
-indexRouter.get("/", checkAuthenticated, (req, res) => {
-    res.render("home", {user: req.user});
+const messageQueries = new db.MessageQueries();
+
+indexRouter.get("/", async(req, res) => {
+    let messages = [];
+    if(req.isAuthenticated()){
+        messages = await messageQueries.getAllMessagesWithDetails();
+    } else {
+        messages = await messageQueries.getOnlyMessages();
+    }
+    res.render("home", {user: req.user, messages: messages});
 });
 
 indexRouter.get("/login", checkNotAuthenticated, (req, res) => {
     res.render("login");
+});
+
+indexRouter.get("/messages", async (req, res) => {
+    let messages = [];
+    if(req.isAuthenticated()){
+        messages = await messageQueries.getAllMessagesWithDetails();
+    } else messages = await messageQueries.getOnlyMessages();
+
 })
 
 function checkAuthenticated(req, res, next){

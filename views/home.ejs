@@ -7,17 +7,40 @@
     <title>Members Only</title>
 </head>
 <body>
+    <div class="row">
+        <%- include("./partials/header.ejs", {user: locals.user ? locals.user : null}) %>
+    </div>
     <div class="container">
-        <div class="row">
-            <%- include("./partials/header.ejs") %>
+
+
+        <div class="row" style="margin:1rem;">
+            <% if(locals.user){ %>
+                <h3> Hello, <b> <%= locals.user.first_name %> </b>
+                    <!--
+                    <form action="/logout?_method=DELETE" method="POST" style="margin: 1rem;">
+                        <button type="submit" class="btn btn-danger">Log Out</button></a>
+                    </form>
+                    -->
+            <% } else { %>
+                <h3> Hello, user! You are not logged in!</h3>
+                <!--
+                <div class="btn-container">
+                    <a href="/login"><button class="btn btn-success">Log in</button></a>
+                </div>
+                -->
+            <% } %>
         </div>
-        <div class="row">
-            Hello <%= user.first_name %>
-        </div>
+
+
+
         
-        <form action="/logout?_method=DELETE" method="POST">
-            <button type="submit" class="btn btn-danger">Log Out</button></a>
-        </form>
+        <div class="messages-container" style="margin-top:3rem">
+            <% if(locals.messages) { %>
+                <% messages.forEach(function(message){ %>
+                    <%- include("./partials/messageCard.ejs", {message: message}) %>
+                <% }) %>
+            <% } %> 
+        </div>
        
     </div>
 

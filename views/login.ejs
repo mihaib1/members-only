@@ -8,7 +8,6 @@
 </head>
 <body>
     <div class="container">
-        <%- include("./partials/header.ejs") %>
         <h3 class="display-3 mt-5">Log In</h3>
         <div>
             <% if(locals.messages.error){ %>
@@ -37,6 +36,15 @@
                 </div>
             </div>
         </form>
+        <div class="row pt-3">
+            <div class="col">
+                <a href="/"> <button class="btn btn-lg btn-primary">Home</button> </a>
+            </div>
+            <div class="col">
+                <a href="/register"> <button class="btn btn-lg btn-primary">Sign Up</button> </a>
+            </div>
+        </div>
+       
     </div>
 </body>
 </html>
