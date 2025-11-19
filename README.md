@@ -26,3 +26,4 @@
     -> Page for user to view personal details and edit some of their data - TO DO
     -> Message details page (not sure if it has any use, might not implement it) - TO DO (?)
     -> Cleanup for unused stuff - TO DO
+    -> Remove comments - TO DO
