@@ -3,7 +3,7 @@
 ## **Progress**
 
 ### Database:
-    -> Create tables for users, messages
+    -> Create tables for users, messages - Done
 
 ### Login Functionality:
     -> Login Page - Done
@@ -20,10 +20,10 @@
 
 ### Messages Functionality:
     -> Message insert form - Done
-    -> Redirect for logged users to message insertion page - TO DO
+    -> Redirect for logged users to message insertion page using "Create Message" button - Done
 
 ### Additional Functionality:
     -> Page for user to view personal details and edit some of their data - TO DO
     -> Message details page (not sure if it has any use, might not implement it) - TO DO (?)
     -> Cleanup for unused stuff - TO DO
-    -> Remove comments - TO DO
+    -> Remove comments - Done
