@@ -2,9 +2,12 @@ const { Router } = require("express");
 const indexRouter = Router();
 
 const db = require("../db/queries");
+const messageQueries = new db.MessageQueries();
+
 const passport = require("passport");
 
-const messageQueries = new db.MessageQueries();
+const authUtils = require("../authUtils");
+const authenticationUtils = new authUtils.AuthenticationUtils();
 
 indexRouter.get("/", async(req, res) => {
     let messages = [];
@@ -16,7 +19,7 @@ indexRouter.get("/", async(req, res) => {
     res.render("home", {user: req.user, messages: messages});
 });
 
-indexRouter.get("/login", checkNotAuthenticated, (req, res) => {
+indexRouter.get("/login", authenticationUtils.checkNotAuthenticated, (req, res) => {
     res.render("login");
 });
 
@@ -27,19 +30,5 @@ indexRouter.get("/messages", async (req, res) => {
     } else messages = await messageQueries.getOnlyMessages();
 
 })
-
-function checkAuthenticated(req, res, next){
-    if(req.isAuthenticated()){
-        return next();
-    } 
-    res.redirect("/login");
-}
-
-function checkNotAuthenticated(req, res, next){
-    if(req.isAuthenticated()){
-        return res.redirect("/");
-    }
-    next();
-}
 
 module.exports = indexRouter;

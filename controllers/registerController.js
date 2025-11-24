@@ -80,15 +80,12 @@ async function checkForExistingUser(email){
     if(email){
         const user = userQueries.getUserDetailsByEmail(email);
         if(user && user.length > 0){
-            console.log('return true')
             return true;
         } else {
-            console.log("return false")
             return false;
         }
         
     } else {
-        console.log("nu a primit email");
         return {
             isSuccess: false,
             message: "Email is required for verification!"

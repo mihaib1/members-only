@@ -1,4 +1,3 @@
-const bcrypt = require("bcryptjs");
 const registrationController = require("../controllers/registerController");
 const registrationActions = new registrationController.ControllerActions();
 

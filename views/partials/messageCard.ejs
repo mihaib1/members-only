@@ -10,7 +10,6 @@
             <% if(message.created_on){ %>
                 <h6 class="card-subtitle mb-2 text-muted">Created by <%= message.full_name %> on <%= message.created_on.toLocaleDateString("en-US") %></h6>
             <% } %>
-            
             <p class="card-text"> <%= message.text %></p>
         </div>
     </div>

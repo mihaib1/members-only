@@ -1,5 +1,4 @@
 const pool = require("./pool");
-const bcrypt = require("bcryptjs");
 
 class MessageQueries {
     async getAllMessagesWithDetails() {
@@ -24,8 +23,7 @@ class MessageQueries {
             let insertData = [data.title, data.text, data.created_by, new Date(), new Date()];
             let insertRequest = await pool.query(SQL, insertData);
             return insertRequest.rows[0].id;
-        }
-                    
+        }           
     }
 }
 
