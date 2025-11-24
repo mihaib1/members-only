@@ -21,7 +21,7 @@ class MessageQueries {
                     VALUES ($1, $2, $3, $4, $5) RETURNING id;`;
         
         if(data){
-            let insertData = [data.title, data.text, data.userId, new Date(), new Date()];
+            let insertData = [data.title, data.text, data.created_by, new Date(), new Date()];
             let insertRequest = await pool.query(SQL, insertData);
             return insertRequest.rows[0].id;
         }

@@ -7,7 +7,11 @@
     <title>Sign-Up Page</title>
 </head>
 <body>
-    
+
+    <div class="row">
+        <%- include("./partials/header.ejs", {user: null}) %>
+    </div>
+
     <div class="container">
         <h3 class="display-3 mt-5">Sign Up</h3>
         <form class="form-inline mt-5" action="/register" method="POST">
@@ -60,12 +64,6 @@
                 </div>
             </div>
         </form>
-        <div class="row pt-4">
-            <div class="col">
-                <a href="/"> <button class="btn btn-primary btn-lg">Home</button> </a>
-            </div>
-        </div>
-
     </div>
 </body>
 </html>

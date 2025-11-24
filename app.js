@@ -4,6 +4,7 @@ const PORT = process.env.PORT ? process.env.PORT : 3000;
 const indexRouter = require("./routers/indexRouter");
 const loginRouter = require("./routers/loginRouter");
 const registerRouter = require("./routers/registerRouter");
+const messageRouter = require("./routers/messageRouter")
 
 const flash = require("express-flash");
 const methodOverride = require("method-override");
@@ -40,6 +41,7 @@ app.use(passport.session());
 app.use("/", indexRouter);
 app.use("/login", loginRouter);
 app.use("/register", registerRouter);
+app.use("/message", messageRouter);
 
 app.delete("/logout", (req, res, next) => {
     req.logout(function(err){
