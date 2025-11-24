@@ -13,7 +13,7 @@ class ControllerActions {
                     let newId = await userQueries.createUser(processedData.userData);
                     return newId;
                 } else {    
-                    console.log("fail la procesarea datelor.")
+                    console.log("Error processing user data.")
                     return processedData;
                 }
             } else {

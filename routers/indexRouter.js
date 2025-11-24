@@ -4,8 +4,6 @@ const indexRouter = Router();
 const db = require("../db/queries");
 const messageQueries = new db.MessageQueries();
 
-const passport = require("passport");
-
 const authUtils = require("../authUtils");
 const authenticationUtils = new authUtils.AuthenticationUtils();
 
